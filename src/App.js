@@ -1,6 +1,7 @@
 import { About } from "./components/About";
 import { Hero } from "./components/Hero";
 import Navbar from "./components/navbar";
+import Support from "./components/Support";
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <Navbar />
       <Hero />
       <About />
+      <Support/>
     </>
   )
 }
