@@ -16,6 +16,7 @@ export const AppRouter = () => {
     return (
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
     );
   };
