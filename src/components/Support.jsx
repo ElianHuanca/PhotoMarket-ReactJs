@@ -3,9 +3,9 @@ import React from 'react';
 import { PhoneIcon, ArrowSmRightIcon } from '@heroicons/react/outline';
 import {ChipIcon, SupportIcon} from '@heroicons/react/solid'
 
-const supportImg = 'https://blog.hubspot.es/hubfs/media/servicioalclienteadistancia.jpeg';
+const supportImg = "https://wwwhoistgroupcom.cdn.triggerfish.cloud/uploads/2019/10/24_7_Support_Dedicated-Hotline.png";
 
-export const Support = () => {
+const Support = () => {
   return (
   <div name='support' className='w-full mt-24'>
       <div className='w-full h-[700px] bg-gray-900/90 absolute'>
@@ -56,3 +56,4 @@ export const Support = () => {
   );
 };
 
+export default Support;

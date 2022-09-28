@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
-import { Link } from 'react-scroll'
-
-
+import { Link } from 'react-scroll';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 
 const Navbar = () => {
-    const [nav, setNav] = useState(false)
-    const handleClick = () => setNav(!nav)
+  const [nav, setNav] = useState(false);
+  const handleClick = () => setNav(!nav);
 
     const handleClose =()=> setNav(!nav)
 
