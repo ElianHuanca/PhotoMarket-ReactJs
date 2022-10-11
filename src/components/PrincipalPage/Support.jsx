@@ -5,7 +5,7 @@ import {ChipIcon, SupportIcon} from '@heroicons/react/solid'
 
 const supportImg = "https://wwwhoistgroupcom.cdn.triggerfish.cloud/uploads/2019/10/24_7_Support_Dedicated-Hotline.png";
 
-const Support = () => {
+export const Support = () => {
   return (
   <div name='support' className='w-full mt-24'>
       <div className='w-full h-[700px] bg-gray-900/90 absolute'>
@@ -56,4 +56,4 @@ const Support = () => {
   );
 };
 
-export default Support;
+

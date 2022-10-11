@@ -7,16 +7,16 @@ import validator from "validator";
 import { startCreatingUserWithEmailPassword } from "../../store/auth";
 
 const formData = {
-  email: "javier193061@gmail.com",
-  password: "123456",
-  displayName: "Javier",
+  email: '',
+  password: '',
+  displayName: '',
 };
 
 export const RegisterScreen = () => {
   const dispatch = useDispatch();
   const { status, errorMessage } = useSelector((state) => state.auth);
 
-  const { values, displayName, email, password, handleInputChange } =
+  const { displayName, email, password, onInputChange } =
     useForm(formData);
   const [error, setError] = useState(null);
 
@@ -58,79 +58,60 @@ export const RegisterScreen = () => {
         </h3>
         <form onSubmit={onSubmit}>
           <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="text"
-              placeholder=" "
-              name="displayName"
-              value={displayName}
-              onChange={handleInputChange}
-              autoComplete="off"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
             <label
               htmlFor="name"
               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               Nombre
             </label>
-          </div>
-
-          <div className="relative z-0 mb-6 w-full group">
             <input
               type="text"
               placeholder=" "
-              name="email"
-              value={email}
-              onChange={handleInputChange}
+              name="displayName"
+              value={displayName}
+              onChange={onInputChange}
               autoComplete="off"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
+            />            
+          </div>
+
+          <div className="relative z-0 mb-6 w-full group">
             <label
               htmlFor="email"
               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               Email
             </label>
+            <input
+              type="text"
+              placeholder=" "
+              name="email"
+              value={email}
+              onChange={onInputChange}
+              autoComplete="off"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />            
           </div>
 
           <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={handleInputChange}
-              required
-              id="floating_password"
-              placeholder=" "
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
             <label
               htmlFor="password"
               className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               Password
             </label>
-          </div>
-
-          {/* <div className="relative z-0 mb-6 w-full group">
             <input
               type="password"
-              name="password2"
+              name="password"
+              value={password}
+              onChange={onInputChange}
               required
-              id="floating_password2"
+              id="floating_password"
               placeholder=" "
-              value={password2}
-              onChange={handleInputChange}
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
-            <label
-              htmlFor="password2"
-              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Confirm Password
-            </label>
-          </div> */}
-
+            />            
+          </div>
+    
           <div>{error && <p className="text-red-500 text-sm">{error}</p>}</div>
           <div>
             {errorMessage && (

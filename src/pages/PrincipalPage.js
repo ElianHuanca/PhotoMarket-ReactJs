@@ -1,10 +1,4 @@
-import { About } from "./components/About";
-import { AllInOne } from "./components/AllInOne";
-import { Footer } from "./components/Footer";
-import { Hero } from "./components/Hero";
-import {Navbar} from "./components/navbar";
-import { Pricing } from "./components/Pricing";
-import { Support } from "./components/Support";
+import { About, Hero,Navbar,Support,AllInOne,Pricing,Footer } from "../components/PrincipalPage/";
 
 export default function PrincipalPage() {
   return (
@@ -16,7 +10,6 @@ export default function PrincipalPage() {
       <AllInOne />
       <Pricing />
       <Footer />
-      <Support/> 
     </>
   );
 }

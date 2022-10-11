@@ -2,29 +2,30 @@ import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-import {
-  startGoogleSignIn,
-  startLoginWithEmailPassword,
-} from "../../store/auth";
+import { startGoogleSignIn,startLoginWithEmailPassword} from "../../store/auth";
 
 export const LoginScreen = () => {
+  const { status, errorMessage } = useSelector( state => state.auth );
+
   const dispatch = useDispatch();
-  const { status, errorMessage } = useSelector((state) => state.auth);
-  const { email, password, handleInputChange } = useForm({
-    email: "nando2@gmail.com",
-    password: "123456",
+  const { email, password, onInputChange } = useForm({
+    email: '',
+    password: ''
   });
 
-  const isAuthenticating = useMemo(() => status === "checking", [status]);
+  const isAuthenticating = useMemo( () => status === 'checking', [status]);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    dispatch(startLoginWithEmailPassword({ email, password }));
-  };
+  const onSubmit = ( event ) => {
+    event.preventDefault();
+
+    // console.log({ email, password })
+    dispatch( startLoginWithEmailPassword({ email, password }) );
+  }
 
   const onGoogleSignIn = () => {
-    dispatch(startGoogleSignIn());
-  };
+    console.log('onGoogleSignIn');
+    dispatch( startGoogleSignIn() );
+  }
   return (
     <div className="bg-slate-100 flex flex-col h-screen my-auto items-center">
       <div className="bg-white border-solid border border-slate-500 rounded-md m-auto w-96 p-5">
@@ -34,8 +35,14 @@ export const LoginScreen = () => {
         >
           Login
         </h3>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={onSubmit }>
           <div className="relative z-0 mb-6 w-full group">
+            <label
+              htmlFor="email"
+              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Email address
+            </label>
             <input
               type="email"
               name="email"
@@ -43,17 +50,18 @@ export const LoginScreen = () => {
               placeholder=" "
               autoComplete="off"
               value={email}
-              onChange={handleInputChange}
+              onChange={onInputChange}
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
-            <label
-              htmlFor="email"
-              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Email address
-            </label>
+            
           </div>
           <div className="relative z-0 mb-6 w-full group">
+            <label
+              htmlFor="password"
+              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -61,15 +69,10 @@ export const LoginScreen = () => {
               id="floating_password"
               placeholder=" "
               value={password}
-              onChange={handleInputChange}
+              onChange={onInputChange}
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
-            <label
-              htmlFor="password"
-              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Password
-            </label>
+            
           </div>
 
           <div>

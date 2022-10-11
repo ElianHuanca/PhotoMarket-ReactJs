@@ -1,9 +1,10 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useCheckAuth } from "../hooks/useCheckAuth";
-import PrincipalPage from "../pages/PrincipalPage";
-import { LoginScreen } from "../auth/pages/LoginScreen";
-import { RegisterScreen } from "../pages/RegisterScreen";
 import { HomeScreen } from "../pages/HomeScreen";
+import { LoginScreen,RegisterScreen } from "../auth/pages/";
+import PrincipalPage from "../pages/PrincipalPage";
+import { PortafolioPage } from "../pages/PortafolioPage";
+import { EventoPage } from "../pages/EventoPage";
 
 export const AppRouter = () => {
   const status = useCheckAuth();
@@ -16,6 +17,8 @@ export const AppRouter = () => {
     return (
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/portafolio" element={<PortafolioPage />} />
+        <Route path="/eventos" element={<EventoPage />} />
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
     );
