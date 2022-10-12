@@ -5,8 +5,11 @@ export const subirFotos = async (files) => {
   for (const file of files) {
     formData.append("files[]", file, file.name);
   }
-  const resp = fetch(`${baseUrl}`, {
+  const resp = await fetch(`${baseUrl}`, {
     method: "POST",
     body: formData,
   });
+
+  const r = await resp.json();
+  return r;
 };

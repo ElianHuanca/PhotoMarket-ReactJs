@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getfotos } from "../helpers/getFotos";
+import { subirFotos } from "../helpers/subirFotos";
 import { FotoCard } from "./FotoCard";
 
 export const Fotos = () => {
@@ -19,8 +20,9 @@ export const Fotos = () => {
     getFts(id);
   }, []);
 
-  const subirFotos = () => {
-    console.log("seleccionar fotos");
+  const subirFotosButton = () => {
+    if (photos.length === 0) return;
+    subirFotos(photos);
   };
 
   return (
@@ -36,7 +38,7 @@ export const Fotos = () => {
             (e) => setPhotos(e.target.files) /* console.log(e.target.files) */
           }
         />
-        <button className="my-2 px-2 py-1" onClick={() => subirFotos()}>
+        <button className="my-2 px-2 py-1" onClick={() => subirFotosButton()}>
           Subir Fotos
         </button>
       </div>
