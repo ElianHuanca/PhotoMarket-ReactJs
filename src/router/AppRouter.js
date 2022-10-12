@@ -4,10 +4,11 @@ import { HomeScreen } from "../pages/HomeScreen";
 import { LoginScreen, RegisterScreen } from "../auth/pages/";
 import PrincipalPage from "../pages/PrincipalPage";
 import { PortafolioPage } from "../pages/PortafolioPage";
-import { EventoPage } from "../pages/EventoPage";
+import { EventosPage } from "../pages/EventosPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { login, login2, logout2 } from "../store/auth";
+import { FotosPage } from "../pages/FotosPage";
 
 export const AppRouter = () => {
   //const status = useCheckAuth();
@@ -40,7 +41,8 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/portafolio" element={<PortafolioPage />} />
-        <Route path="/eventos" element={<EventoPage />} />
+        <Route path="/evento/:idEvento" element={<FotosPage />} />
+        <Route path="/eventos" element={<EventosPage />} />
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
     );

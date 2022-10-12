@@ -2,24 +2,28 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getUserByEmail } from "../helpers/authHelper";
+import { getEventos } from "../helpers/getEventos";
+import { EventoCard } from "./EventoCard";
 
 export const Eventos = () => {
-  const user = useSelector((state) => state.auth);
-  const [lara, setLara] = useState(null);
+  const { id } = useSelector((state) => state.auth2);
+  const [eventos, setEventos] = useState([]);
 
   useEffect(() => {
-    async function getLara(email) {
-      const userLaravel = await getUserByEmail(user.email);
-      setLara(userLaravel);
+    async function getEvts(id) {
+      const ev = await getEventos(id);
+      setEventos(ev);
     }
-    getLara(user.email);
+    getEvts(id);
   }, []);
 
   return (
-    <div className="w-full h-screen bg-zinc-200 flex flex-col justify-between">
-      <div className="grid md:grid-cols-2 max-w-[1300px] m-auto">
-        <div className="flex flex-col justify-center md:items-start w-full px-2 py-8">
-          <p>Mis Eventos</p>
+    <div className="w-full h-screen bg-zinc-200 flex flex-col">
+      <div className="w-full m-auto ">
+        <div className="flex flex-col space-y-5 justify-center md:items-start w-full px-3">
+          {eventos.map((evt) => (
+            <EventoCard key={evt.id} evento={evt} />
+          ))}
         </div>
       </div>
     </div>
