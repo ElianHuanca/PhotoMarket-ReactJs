@@ -4,29 +4,42 @@ import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 
 import validator from "validator";
-import { startCreatingUserWithEmailPassword } from "../../store/auth";
+import {
+  startCreatingUserWithEmailPassword,
+  startCreatingUserWithEmailPasswordLaravel,
+} from "../../store/auth";
+//import { startCreatingUserWithEmailPasswordLaravel } from "../../store/auth/thunk2";
 
 const formData = {
-  email: '',
-  password: '',
-  displayName: '',
+  email: "",
+  password: "",
+  displayName: "",
 };
 
 export const RegisterScreen = () => {
   const dispatch = useDispatch();
   const { status, errorMessage } = useSelector((state) => state.auth);
 
-  const { displayName, email, password, onInputChange } =
-    useForm(formData);
+  const { displayName, email, password, onInputChange } = useForm(formData);
   const [error, setError] = useState(null);
 
-  const isAuthenticating = useMemo(() => status === "checking", [status]);
+  const isAuthenticating = false; //useMemo(() => status === "checking", [status]);
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (isFormValid()) {
-      dispatch(
+      //FIREBASE REIGSTER
+      /* dispatch(
         startCreatingUserWithEmailPassword({ displayName, email, password })
+      ); */
+
+      //LARAVEL REGISTER
+      dispatch(
+        startCreatingUserWithEmailPasswordLaravel({
+          name: displayName,
+          email,
+          password,
+        })
       );
     }
   };
@@ -72,7 +85,7 @@ export const RegisterScreen = () => {
               onChange={onInputChange}
               autoComplete="off"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />            
+            />
           </div>
 
           <div className="relative z-0 mb-6 w-full group">
@@ -90,7 +103,7 @@ export const RegisterScreen = () => {
               onChange={onInputChange}
               autoComplete="off"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />            
+            />
           </div>
 
           <div className="relative z-0 mb-6 w-full group">
@@ -109,9 +122,9 @@ export const RegisterScreen = () => {
               id="floating_password"
               placeholder=" "
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />            
+            />
           </div>
-    
+
           <div>{error && <p className="text-red-500 text-sm">{error}</p>}</div>
           <div>
             {errorMessage && (

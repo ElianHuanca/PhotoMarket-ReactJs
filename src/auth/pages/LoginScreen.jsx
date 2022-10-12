@@ -2,30 +2,34 @@ import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-import { startGoogleSignIn,startLoginWithEmailPassword} from "../../store/auth";
+import {
+  startGoogleSignIn,
+  startLoginWithEmailPassword,
+  startLoginWithEmailPasswordLaravel,
+} from "../../store/auth";
 
 export const LoginScreen = () => {
-  const { status, errorMessage } = useSelector( state => state.auth );
+  const { status, errorMessage } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
 
-  const isAuthenticating = useMemo( () => status === 'checking', [status]);
+  const isAuthenticating = false; //useMemo(() => status === "checking", [status]);
 
-  const onSubmit = ( event ) => {
+  const onSubmit = (event) => {
     event.preventDefault();
 
     // console.log({ email, password })
-    dispatch( startLoginWithEmailPassword({ email, password }) );
-  }
+    dispatch(startLoginWithEmailPasswordLaravel({ email, password }));
+  };
 
-  const onGoogleSignIn = () => {
-    console.log('onGoogleSignIn');
-    dispatch( startGoogleSignIn() );
-  }
+  /* const onGoogleSignIn = () => {
+    console.log("onGoogleSignIn");
+    dispatch(startGoogleSignIn());
+  }; */
   return (
     <div className="bg-slate-100 flex flex-col h-screen my-auto items-center">
       <div className="bg-white border-solid border border-slate-500 rounded-md m-auto w-96 p-5">
@@ -35,7 +39,7 @@ export const LoginScreen = () => {
         >
           Login
         </h3>
-        <form onSubmit={onSubmit }>
+        <form onSubmit={onSubmit}>
           <div className="relative z-0 mb-6 w-full group">
             <label
               htmlFor="email"
@@ -53,7 +57,6 @@ export const LoginScreen = () => {
               onChange={onInputChange}
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
-            
           </div>
           <div className="relative z-0 mb-6 w-full group">
             <label
@@ -72,7 +75,6 @@ export const LoginScreen = () => {
               onChange={onInputChange}
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
-            
           </div>
 
           <div>
@@ -91,7 +93,7 @@ export const LoginScreen = () => {
             Iniciar Sesión
           </button>
 
-          <div
+          {/* <div
             className="border-solid border border-slate-500 rounded-md mb-2 cursor-pointer flex"
             disabled={isAuthenticating}
           >
@@ -110,7 +112,7 @@ export const LoginScreen = () => {
                 <b className="">Sign in with google</b>
               </p>
             </div>
-          </div>
+          </div> */}
           <Link to="/auth/register" className="text-center block ">
             <span className="hover:text-slate-600">Crear una nueva Cuenta</span>
           </Link>

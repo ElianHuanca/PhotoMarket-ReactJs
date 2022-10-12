@@ -1,17 +1,39 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import { HomeScreen } from "../pages/HomeScreen";
-import { LoginScreen,RegisterScreen } from "../auth/pages/";
+import { LoginScreen, RegisterScreen } from "../auth/pages/";
 import PrincipalPage from "../pages/PrincipalPage";
 import { PortafolioPage } from "../pages/PortafolioPage";
 import { EventoPage } from "../pages/EventoPage";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { login, login2, logout2 } from "../store/auth";
 
 export const AppRouter = () => {
-  const status = useCheckAuth();
+  //const status = useCheckAuth();
+  const dispatch = useDispatch();
+  const { status } = useSelector((state) => state.auth2);
+  const [a, setA] = useState(false);
 
-  if (status === "checking") {
+  /* if (status === "checking") {
     return <h1>checking credentials</h1>;
-  }
+  } */
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      dispatch(logout2());
+    } else {
+      dispatch(login2({ id: user.id, email: user.email }));
+    }
+
+    console.log("routes render");
+    setA(!a);
+  }, [status]);
+
+  /* if (status === "not-authenticated") {
+    return <h1>checking credentials</h1>;
+  } */
 
   const PrivateRoutes = () => {
     return (
