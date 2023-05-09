@@ -1,6 +1,6 @@
-import { About, Hero,Navbar,Support,AllInOne,Pricing,Footer } from "../components/PrincipalPage/";
+import { About, Hero,Navbar,Support,AllInOne,Pricing,Footer } from "../components/PrincipalPage";
 
-export default function PrincipalPage() {
+export const PrincipalPage = () => {
   return (
     <>
       <Navbar />

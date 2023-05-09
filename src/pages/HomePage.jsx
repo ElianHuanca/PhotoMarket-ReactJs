@@ -1,6 +1,6 @@
 import { Navbar,ListFotografos } from "../components/HomePage";
 
-export const HomeScreen = () => {
+export const HomePage = () => {
   
   return (
     <>

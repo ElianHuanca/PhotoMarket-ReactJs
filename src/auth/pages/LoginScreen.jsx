@@ -1,35 +1,24 @@
-import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import {
-  startGoogleSignIn,
-  startLoginWithEmailPassword,
   startLoginWithEmailPasswordLaravel,
 } from "../../store/auth";
 
 export const LoginScreen = () => {
-  const { status, errorMessage } = useSelector((state) => state.auth);
-
   const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm({
     email: "",
     password: "",
   });
 
-  const isAuthenticating = false; //useMemo(() => status === "checking", [status]);
+  const isAuthenticating = false; 
 
   const onSubmit = (event) => {
     event.preventDefault();
-
-    // console.log({ email, password })
     dispatch(startLoginWithEmailPasswordLaravel({ email, password }));
   };
 
-  /* const onGoogleSignIn = () => {
-    console.log("onGoogleSignIn");
-    dispatch(startGoogleSignIn());
-  }; */
   return (
     <div className="bg-slate-100 flex flex-col h-screen my-auto items-center">
       <div className="bg-white border-solid border border-slate-500 rounded-md m-auto w-96 p-5">
@@ -51,7 +40,7 @@ export const LoginScreen = () => {
               type="email"
               name="email"
               required
-              placeholder=" "
+              placeholder="Correo Electronico"
               autoComplete="off"
               value={email}
               onChange={onInputChange}
@@ -70,18 +59,12 @@ export const LoginScreen = () => {
               name="password"
               required
               id="floating_password"
-              placeholder=" "
+              placeholder="Contraseña"
               value={password}
               onChange={onInputChange}
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
-          </div>
-
-          <div>
-            {errorMessage && (
-              <p className="text-red-500 text-sm">{errorMessage}</p>
-            )}
-          </div>
+          </div>          
 
           <button
             type="submit"
@@ -92,27 +75,6 @@ export const LoginScreen = () => {
           >
             Iniciar Sesión
           </button>
-
-          {/* <div
-            className="border-solid border border-slate-500 rounded-md mb-2 cursor-pointer flex"
-            disabled={isAuthenticating}
-          >
-            <div
-              className="flex pt-1 pb-1 m-auto border-solid border border-slate-100"
-              onClick={onGoogleSignIn}
-            >
-              <div className="mr-1">
-                <img
-                  className="google-icon"
-                  src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                  alt="google button"
-                />
-              </div>
-              <p className="">
-                <b className="">Sign in with google</b>
-              </p>
-            </div>
-          </div> */}
           <Link to="/auth/register" className="text-center block ">
             <span className="hover:text-slate-600">Crear una nueva Cuenta</span>
           </Link>

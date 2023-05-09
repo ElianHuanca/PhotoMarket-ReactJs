@@ -1,13 +1,14 @@
 import React from 'react'
+import { CardComponent } from './CardComponent'
+
 
 export const ListFotografos = () => {
   return (
-    <div className='w-full h-screen bg-zinc-200 flex flex-col justify-between'>
-        <div className='grid md:grid-cols-2 max-w-[1300px] m-auto'>
-            <div className='flex flex-col justify-center md:items-start w-full px-2 py-8'> 
-                <p>Lista De Fotografos</p>
-            </div>
+      
+        <div className='px-20 py-20 bg-gray-100 hover:bg-gray-200 grid grid-cols-3 gap-3'>
+          <CardComponent />
         </div>
-    </div>
+        
+    
   )
 }

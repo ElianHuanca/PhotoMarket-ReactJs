@@ -1,51 +1,54 @@
-import React, { useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-
 import validator from "validator";
-import {
-  startCreatingUserWithEmailPassword,
-  startCreatingUserWithEmailPasswordLaravel,
-} from "../../store/auth";
-//import { startCreatingUserWithEmailPasswordLaravel } from "../../store/auth/thunk2";
+import { startCreatingUserWithEmailPasswordLaravel } from "../../store/auth";
+import { SelectOption } from "./SelectOption";
 
-const formData = {
-  email: "",
-  password: "",
-  displayName: "",
-};
+
 
 export const RegisterScreen = () => {
   const dispatch = useDispatch();
-  const { status, errorMessage } = useSelector((state) => state.auth);
 
-  const { displayName, email, password, onInputChange } = useForm(formData);
+  const { name, email, password, onInputChange } = useForm({
+    name: "",
+    email: "",
+    password: "",
+    idRol:""
+  });
   const [error, setError] = useState(null);
 
-  const isAuthenticating = false; //useMemo(() => status === "checking", [status]);
+  const options = [
+    { value: '3', label: 'Organizador' },
+    { value: '2', label: 'Fotografo' },
+  ];
+
+  const [selectedOption, setSelectedOption] = useState('3');
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const isAuthenticating = false;
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (isFormValid()) {
-      //FIREBASE REIGSTER
-      /* dispatch(
-        startCreatingUserWithEmailPassword({ displayName, email, password })
-      ); */
-
       //LARAVEL REGISTER
       dispatch(
         startCreatingUserWithEmailPasswordLaravel({
-          name: displayName,
+          name,
           email,
           password,
+          idRol: selectedOption
         })
       );
     }
   };
 
   const isFormValid = () => {
-    if (displayName.trim().length === 0) {
+    if (name.trim().length === 0) {
       setError("Name is required");
       return false;
     } else if (!validator.isEmail(email)) {
@@ -60,6 +63,7 @@ export const RegisterScreen = () => {
     setError(null);
     return true;
   };
+
   return (
     <div className="bg-slate-100 flex flex-col h-screen my-auto items-center">
       <div className="bg-white border-solid border border-slate-500 rounded-md m-auto w-96 p-5">
@@ -79,9 +83,9 @@ export const RegisterScreen = () => {
             </label>
             <input
               type="text"
-              placeholder=" "
-              name="displayName"
-              value={displayName}
+              placeholder=""
+              name="name"
+              value={name}
               onChange={onInputChange}
               autoComplete="off"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -125,12 +129,15 @@ export const RegisterScreen = () => {
             />
           </div>
 
-          <div>{error && <p className="text-red-500 text-sm">{error}</p>}</div>
-          <div>
-            {errorMessage && (
-              <p className="text-red-500 text-sm">{errorMessage}</p>
-            )}
+          <div className="my-3">
+            <SelectOption
+              options={options}
+              value={selectedOption}
+              onChange={handleOptionChange}
+            />
           </div>
+
+          <div>{error && <p className="text-red-500 text-sm">{error}</p>}</div>
 
           <button
             disabled={isAuthenticating}

@@ -7,6 +7,7 @@ export const auth2Slice = createSlice({
     id: null,
     //name: null,
     email: null,
+    idRol:null
   },
   reducers: {
     login2: (state, { payload }) => {
@@ -14,6 +15,7 @@ export const auth2Slice = createSlice({
       state.id = payload.id;
       //state.name = payload.name;
       state.email = payload.email;
+      state.idRol =payload.idRol;
     },
 
     logout2: (state, { payload }) => {
@@ -21,6 +23,7 @@ export const auth2Slice = createSlice({
       state.id = null;
       //state.name = null;
       state.email = null;
+      state.idRol = null;
     },
 
     checkingCredentials2: (state) => {

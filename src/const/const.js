@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost/sw-photo/public/api";
+export const baseUrl = "http://localhost/photo-market-laravel/public/api";

@@ -1,17 +1,17 @@
-import { async } from "@firebase/util";
+
 import { baseUrl } from "../const/const";
 
 export const getUserByEmail = async (email) => {
-  var respuesta;
+  var response;
   try {
     const resp = await fetch(`${baseUrl}/getUserByEmail/${email}`);
     console.log("pasa por el try");
-    respuesta = await resp.json();
+    response = await resp.json();
   } catch (error) {
     console.log("para por el error");
-    respuesta = "error.message";
+    response = "error.message";
   }
-  return respuesta;
+  return response;
 };
 
 export const loginLaravel = async (email, password) => {
@@ -25,12 +25,12 @@ export const loginLaravel = async (email, password) => {
       password,
     }),
   });
-  const a = await resp.json();
-  return a;
+  const response = await resp.json();
+  return response;
 };
 
-export const registerLaravel = async (name, email, password) => {
-  const resp = await fetch(`http://localhost/sw-photo/public/api/register`, {
+export const registerLaravel = async (name, email, password,idRol) => {
+  const resp = await fetch(`${baseUrl}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,8 +39,9 @@ export const registerLaravel = async (name, email, password) => {
       name,
       email,
       password,
+      idRol
     }),
   });
-  const a = await resp.json();
-  return a;
+  const response = await resp.json();
+  return response;
 };
