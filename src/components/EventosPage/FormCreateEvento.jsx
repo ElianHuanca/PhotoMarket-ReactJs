@@ -3,9 +3,7 @@ import { useForm } from '../../hooks/useForm';
 import { getFotografos } from '../../helpers/getFotografos';
 import { postEvento } from '../../helpers/postEvento';
 
-
-
-export const FormCreateEvento = ({id}) => {
+export const FormCreateEvento = ({ id }) => {
     const { titulo, descripcion, lugar, fecha, hora, onInputChange } = useForm({
         titulo: "",
         descripcion: "",
@@ -21,14 +19,19 @@ export const FormCreateEvento = ({id}) => {
             const fot = await getFotografos();
             setFotografos(fot);
         }
-        getFotografo();
-        console.log(fotografos);
+        const delay = 2000; // Retraso de 2 segundos (puedes ajustar este valor según tus necesidades)
+        const timer = setTimeout(() => {
+            getFotografo();
+        }, delay);
+
+        // Limpiamos el temporizador al desmontar el componente
+        return () => clearTimeout(timer);
+        
     }, []);
 
 
     const handleChange = () => {
         setBandera(!bandera);
-
     };
     const handleCheckboxChange = (event) => {
         const { value, checked } = event.target;
@@ -40,10 +43,10 @@ export const FormCreateEvento = ({id}) => {
     };
 
     const handleSubmit = async () => {
-        await postEvento(titulo, descripcion, lugar, fecha, hora,id,select);
+        await postEvento(titulo, descripcion, lugar, fecha, hora, id, select);
+        setBandera(!bandera);
+        window.location.reload();
     };
-
-
 
     return (
         <>

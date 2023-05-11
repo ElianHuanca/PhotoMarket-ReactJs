@@ -9,10 +9,10 @@ export const FotoCard = ({ foto }) => {
           <h2 className=" text-lg font-medium dark:text-white text-gray-900">Precio: {foto.precio}$us</h2>          
         </div>
         <div>
-        <h2 className=" text-lg font-medium dark:text-white text-gray-900">Cantidad Vendida: 200</h2>          
+        <h2 className=" text-lg font-medium dark:text-white text-gray-900">Cantidad Vendida:{foto.cantidad}</h2>          
         </div>
         <div>
-        <h2 className=" text-lg font-medium dark:text-white text-gray-900">Total: 2000$us</h2>          
+        <h2 className=" text-lg font-medium dark:text-white text-gray-900">Total: {foto.precio*foto.cantidad}$us</h2>          
         </div>
       </div>
     </div>

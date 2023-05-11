@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getEventosFotografo, getEventosOrganizador } from "../../helpers/getEventos";
-import { EventoCard2 } from "./EventoCard2";
+import { EventoCard } from "./EventoCard";
 import { FormCreateEvento } from "./FormCreateEvento";
 
 export const Eventos = () => {
@@ -19,15 +19,21 @@ export const Eventos = () => {
         setEventos(ev);
       }
     }
-    getEvts(id);
-  }, []);
+    const delay = 2000; // Retraso de 2 segundos (puedes ajustar este valor según tus necesidades)
+    const timer = setTimeout(() => {
+      getEvts(id);
+    }, delay);
+
+    // Limpiamos el temporizador al desmontar el componente
+    return () => clearTimeout(timer);
+  },[]);
 
   return (
     <div className="container mx-auto px-20 py-20 bg-gray-100 hover:bg-gray-200">
       { idRol==3 && <FormCreateEvento id={id}/>}                  
       <div className='grid grid-cols-3 gap-3'>
         {eventos.map((evt) => (
-          <EventoCard2 key={evt.id} evento={evt} />
+          <EventoCard key={evt.id} evento={evt} />
         ))}
       </div>
     </div>

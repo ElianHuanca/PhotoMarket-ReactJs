@@ -23,11 +23,18 @@ export const Fotos = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (photos.length > 0) {
-      await subirFotos(photos, id, idEvento);
-    }
-    setSelectedImages([]);
-    setPhotos([]);
+
+    const delay = 2000; // Retraso de 2 segundos (puedes ajustar este valor según tus necesidades)
+    const timer = setTimeout(async () => {
+      if (photos.length > 0) {
+        await subirFotos(photos, id, idEvento);
+      }
+      setSelectedImages([]);
+      setPhotos([]);
+    }, delay);
+
+    // Limpiamos el temporizador al desmontar el componente
+    return () => clearTimeout(timer);
   };
 
   useEffect(() => {
@@ -35,7 +42,13 @@ export const Fotos = () => {
       const fotos = await getfotos(id, idRol, idEvento);
       setFotos(fotos);
     }
-    getFts(id);
+    const delay = 2000; // Retraso de 2 segundos (puedes ajustar este valor según tus necesidades)
+    const timer = setTimeout(() => {
+      getFts(id);
+    }, delay);
+
+    // Limpiamos el temporizador al desmontar el componente
+    return () => clearTimeout(timer);
   }, [handleSubmit]);
 
   return (

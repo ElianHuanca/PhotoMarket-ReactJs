@@ -1,11 +1,11 @@
-import { Navbar,ListFotografos } from "../components/HomePage";
+import { Navbar, HomeScreen } from "../components/HomePage";
 
 export const HomePage = () => {
   
   return (
     <>
       <Navbar />
-      <ListFotografos />
+      <HomeScreen />
     </>
   );
 };
