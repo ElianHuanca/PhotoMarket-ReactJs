@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/PhotoMarket-ReactJs/static/css/main.d35bf010.css",
+    "main.js": "/PhotoMarket-ReactJs/static/js/main.ef88467e.js",
+    "index.html": "/PhotoMarket-ReactJs/index.html",
+    "main.d35bf010.css.map": "/PhotoMarket-ReactJs/static/css/main.d35bf010.css.map",
+    "main.ef88467e.js.map": "/PhotoMarket-ReactJs/static/js/main.ef88467e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d35bf010.css",
+    "static/js/main.ef88467e.js"
+  ]
+}
